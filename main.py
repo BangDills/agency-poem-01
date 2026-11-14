@@ -8,7 +8,13 @@ not only white space, and the judge reads exactly the bytes written.
 
 import os
 
-OUTPUT_DIR = os.environ.get("MAKEFUN_OUTPUT_DIR", "/output")
+def resolve_output_dir() -> str:
+    """Resolve output directory, falling back to /output when unset or empty."""
+    val = os.environ.get("MAKEFUN_OUTPUT_DIR")
+    return val if val else "/output"
+
+
+OUTPUT_DIR = resolve_output_dir()
 
 POEM = """The First Line
 
@@ -44,8 +50,14 @@ def validate_poem(text: str) -> str:
 def main() -> None:
     poem_to_write = validate_poem(POEM)
     os.makedirs(OUTPUT_DIR, exist_ok=True)
-    with open(os.path.join(OUTPUT_DIR, "entry.txt"), "w", encoding="utf-8", newline="") as handle:
+    target_path = os.path.join(OUTPUT_DIR, "entry.txt")
+    tmp_path = os.path.join(OUTPUT_DIR, "entry.txt.tmp")
+    with open(tmp_path, "w", encoding="utf-8", newline="") as handle:
         handle.write(poem_to_write)
+    os.replace(tmp_path, target_path)
+    with open(target_path, "r", encoding="utf-8") as handle:
+        if handle.read() != poem_to_write:
+            raise ValueError("Written entry does not match expected poem")
 
 
 if __name__ == "__main__":
