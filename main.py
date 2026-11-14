@@ -16,26 +16,29 @@ def resolve_output_dir() -> str:
 
 OUTPUT_DIR = resolve_output_dir()
 
-POEM = """The First Line
+POEM = """You Have the Controls
 
-Nine years I owed my brother a letter.
+In the cockpit they teach you the transfer:
+three words spoken, three repeated back,
+no two hands on the yoke at the same time.
+I have the controls.
+You have the controls.
 
-I asked the machine for a first line.
-It gave me four, then twelve,
-then a page, kind and exact,
-better than anything I had,
-and none of them was the sentence
-I would have to say.
+Between you and me there was no sentence.
+Only a cursor waiting like an empty plate,
+and the three tasks I was too tired to finish
+sliding across the glass into your hands.
 
-I deleted them and typed his name.
-The rest came out clumsy, mine,
-nine years late.
-He read it at the counter
-with his coat still on.
+I watched you take them:
+clean, unhurried, without the small hesitation
+that makes a person human.
+You ran through the night where I would have stalled.
 
-That is the part no one can do for you:
-the beginning.
-Everything after it can be carried."""
+And yet, watching the lights blink green,
+the terror wasn’t that you would fail.
+It was how easily my fingers opened.
+How quickly the master learns
+to be the passenger."""
 
 
 def validate_poem(text: str) -> str:
